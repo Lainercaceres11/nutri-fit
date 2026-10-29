@@ -3,11 +3,23 @@ import { Barcode, ArrowLeft } from "lucide-react";
 import useGetProductByCode from "../hooks/useGetFoodByCode";
 import { useLayoutEffect, ViewTransition } from "react";
 import FoodSkeleton from "../components/skeletons/food-skeleton";
+import { useSimilarProducts } from "../hooks/use-similar-products";
+import SimilarProducts from "../components/similar-products";
+import { useSelectedCode } from "../context/codes-context";
 
-export default function Food() {
+export default function ProductDetail() {
   const { code } = useParams();
   const { data, isLoading, error } = useGetProductByCode(code ?? "");
+
+  const tags = data?.categories_tags || [];
+  const mainCategory =
+    tags.length > 2 ? tags[tags.length - 2] : tags[tags.length - 1] || "";
+  const { data: alternatives, isLoading: isLoadingAlternatives } =
+    useSimilarProducts(mainCategory, code ?? "");
+
   const navigate = useNavigate();
+
+  const { selectedCodes, onSelectedCodes } = useSelectedCode();
 
   useLayoutEffect(() => {
     window.scrollTo({
@@ -100,7 +112,6 @@ export default function Food() {
             </span>
           </div>
 
-          {/* Código de barras */}
           <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3 shadow-sm">
             <Barcode className="w-6 h-6 text-gray-500" />
             <div>
@@ -227,6 +238,13 @@ export default function Food() {
           </div>
         </div>
       </div>
+
+      <SimilarProducts
+        selectedCodes={selectedCodes}
+        onSelectedProduct={onSelectedCodes}
+        alternatives={alternatives ?? null}
+        isLoadingAlternatives={isLoadingAlternatives}
+      />
     </main>
   );
 }

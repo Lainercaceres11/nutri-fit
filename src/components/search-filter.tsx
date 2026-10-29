@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Barcode } from "lucide-react";
+import { Barcode, Camera } from "lucide-react";
+import BarcodeScanner from "./barcode-scanner";
+import { useNavigate } from "react-router";
 
 type SearchBarProps = {
   onSearch: (barcode: string) => void;
@@ -7,12 +9,20 @@ type SearchBarProps = {
 
 export default function SearchFilter({ onSearch }: SearchBarProps) {
   const [barcode, setBarcode] = useState("");
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (barcode.trim()) {
       onSearch(barcode);
     }
+  };
+
+  const handleBarcodeScanned = (scannedBarcode: string) => {
+    setBarcode(scannedBarcode);
+    setIsScannerOpen(false);
+    navigate(`/food/${scannedBarcode}`);
   };
 
   return (
@@ -29,8 +39,15 @@ export default function SearchFilter({ onSearch }: SearchBarProps) {
           value={barcode}
           onChange={(e) => setBarcode(e.target.value)}
           placeholder="Buscar por código de barras (ej. 7622210992314)"
-          className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all"
+          className="w-full pl-11 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all"
         />
+        <button
+          type="button"
+          onClick={() => setIsScannerOpen(true)}
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+        >
+          <Camera className="h-5 w-5" />
+        </button>
       </div>
 
       <button
@@ -39,6 +56,13 @@ export default function SearchFilter({ onSearch }: SearchBarProps) {
       >
         Buscar
       </button>
+
+      {isScannerOpen && (
+        <BarcodeScanner
+          onScan={handleBarcodeScanned}
+          onClose={() => setIsScannerOpen(false)}
+        />
+      )}
     </form>
   );
 }

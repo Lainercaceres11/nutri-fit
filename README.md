@@ -5,8 +5,9 @@ NutriFit es una aplicación web para explorar y comparar productos alimentarios.
 ## Funcionalidades
 
 - Explorar productos ordenados por popularidad.
-- Buscar productos por código de barras.
 - Filtrar el catálogo por país y categoría.
+- Obtener información del producto por medio del código de barras
+- Ver productos similares en los detalles del producto
 - Consultar la información de un producto.
 - Seleccionar productos y comparar sus datos, incluidos Nutri-Score, Eco-Score y grupo NOVA cuando están disponibles.
 - Navegar los resultados con paginación.

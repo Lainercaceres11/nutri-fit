@@ -5,6 +5,7 @@ export default function useGetProductByCode(code: string) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["food", code],
     queryFn: () => openFoodService.getFoodByCode(code),
+    enabled: !!code,
   });
 
   return { data, isLoading, error };

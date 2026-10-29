@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "../pages/home";
-import Food from "../pages/food";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Compare from "../pages/compare";
+
+import ProductDetail from "../pages/product-detail";
 
 export default function AppRoutes() {
   return (
@@ -11,7 +12,7 @@ export default function AppRoutes() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="food/:code" element={<Food />} />
+        <Route path="food/:code" element={<ProductDetail />} />
         <Route path="/compare/:selectedProducts" element={<Compare />} />
       </Routes>
       <Footer />
