@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { Barcode, ArrowLeft } from "lucide-react";
 import useGetProductByCode from "../hooks/useGetFoodByCode";
 import { useLayoutEffect, ViewTransition } from "react";
@@ -7,6 +7,7 @@ import FoodSkeleton from "../components/skeletons/food-skeleton";
 export default function Food() {
   const { code } = useParams();
   const { data, isLoading, error } = useGetProductByCode(code ?? "");
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     window.scrollTo({
@@ -23,9 +24,13 @@ export default function Food() {
     return (
       <div className="flex flex-col items-center justify-center mt-20">
         <p className="text-red-500 mb-4">Producto no encontrado.</p>
-        <Link to="/" className="text-blue-600 hover:underline">
+
+        <button
+          onClick={() => navigate(-1)}
+          className="text-blue-600 hover:underline"
+        >
           Volver a los resultados
-        </Link>
+        </button>
       </div>
     );
   }
@@ -58,13 +63,13 @@ export default function Food() {
   return (
     <main className="max-w-5xl mx-auto p-6 flex flex-col gap-6 bg-gray-50 min-h-screen">
       <div>
-        <Link
-          to="/"
+        <button
+          onClick={() => navigate(-1)}
           className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           Volver a los resultados
-        </Link>
+        </button>
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">

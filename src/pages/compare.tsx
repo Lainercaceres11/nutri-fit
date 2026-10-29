@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, X } from "lucide-react";
 import useCompareProduct from "../hooks/useCompareProduct";
 import type { Product } from "../types/types"; // Asumiendo que exportas Product de aquí
@@ -36,10 +36,8 @@ export default function Compare() {
   }
 
   const handleRemoveProduct = (codeToRemove: string) => {
-  
     onSelectedCodes(codeToRemove);
 
-  
     const newCodes = codesToString.filter((code) => code !== codeToRemove);
     if (newCodes.length === 0) {
       navigate("/");
@@ -125,13 +123,13 @@ export default function Compare() {
   return (
     <main className="max-w-6xl mx-auto p-6 flex flex-col gap-6 bg-gray-50 min-h-screen">
       <div>
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />
-          Volver a resultados
-        </Link>
+          Volver a los resultados
+        </button>
       </div>
 
       <h1 className="text-3xl font-extrabold text-gray-900">
