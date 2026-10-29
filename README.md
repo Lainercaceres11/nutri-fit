@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# NutriFit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NutriFit es una aplicación web para explorar y comparar productos alimentarios. Permite consultar información nutricional y otros indicadores de productos registrados en Open Food Facts.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Explorar productos ordenados por popularidad.
+- Buscar productos por código de barras.
+- Filtrar el catálogo por país y categoría.
+- Consultar la información de un producto.
+- Seleccionar productos y comparar sus datos, incluidos Nutri-Score, Eco-Score y grupo NOVA cuando están disponibles.
+- Navegar los resultados con paginación.
 
-## Expanding the ESLint configuration
+## Tecnologías
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React y TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- TanStack Query
+- Open Food Facts API
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Requisitos
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Node.js y npm
+- Acceso a internet para consultar Open Food Facts
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Instalación y ejecución
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Instala las dependencias:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   npm install
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. Crea un archivo `.env.local` en la raíz del proyecto y configura la URL base de la API:
+
+   ```env
+   VITE_API_URL=https://world.openfoodfacts.org/api/v2
+   ```
+
+3. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+Vite mostrará en la terminal la dirección local para abrir la aplicación.
+
+## Scripts disponibles
+
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run build` | Comprueba los tipos y genera la versión de producción en `dist/`. |
+| `npm run preview` | Sirve localmente la versión de producción. |
+| `npm run lint` | Ejecuta ESLint. |
+
+## Datos
+
+Los datos son proporcionados por [Open Food Facts](https://world.openfoodfacts.org/), una base de datos colaborativa. La información puede ser incompleta o variar según el producto. NutriFit es un proyecto independiente y no está afiliado oficialmente con Open Food Facts; la información mostrada no sustituye el consejo de profesionales de la salud.
