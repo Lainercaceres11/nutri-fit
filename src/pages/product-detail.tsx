@@ -1,15 +1,17 @@
 import { useParams, useNavigate } from "react-router";
-import { Barcode, ArrowLeft } from "lucide-react";
+import { Barcode, ArrowLeft, Heart } from "lucide-react";
 import useGetProductByCode from "../hooks/useGetFoodByCode";
 import { useLayoutEffect, ViewTransition } from "react";
 import FoodSkeleton from "../components/skeletons/food-skeleton";
 import { useSimilarProducts } from "../hooks/use-similar-products";
 import SimilarProducts from "../components/similar-products";
 import { useSelectedCode } from "../context/codes-context";
+import { useFavoriteStore } from "../store/favorites-store";
 
 export default function ProductDetail() {
   const { code } = useParams();
   const { data, isLoading, error } = useGetProductByCode(code ?? "");
+  const { isFavorite, toggleProduct } = useFavoriteStore();
 
   const tags = data?.categories_tags || [];
   const mainCategory =
@@ -101,6 +103,15 @@ export default function ProductDetail() {
           </div>
 
           <div className="flex flex-wrap gap-2">
+            <button
+              className=" rounded-full w-7 h-7 flex items-center justify-center shadow-sm border border-gray-200 text-red-500 hover:bg-red-50"
+              aria-label="Marcar como favorito"
+              onClick={() => toggleProduct(data)}
+            >
+              <Heart
+                className={`${isFavorite(data.code) ? "fill-red-600" : "fill-amber-50"}`}
+              />
+            </button>
             <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded uppercase">
               Nutri-Score {data.nutriscore_grade?.toUpperCase() || "N/D"}
             </span>

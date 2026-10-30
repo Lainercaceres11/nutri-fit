@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import Compare from "../pages/compare";
 
 import ProductDetail from "../pages/product-detail";
+import Favorites from "../pages/favorites";
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="food/:code" element={<ProductDetail />} />
         <Route path="/compare/:selectedProducts" element={<Compare />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <Footer />
     </BrowserRouter>
