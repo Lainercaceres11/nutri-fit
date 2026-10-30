@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Barcode, Camera } from "lucide-react";
-import BarcodeScanner from "./barcode-scanner";
 import { useNavigate } from "react-router";
+import BarcodeScanner from "./barcode-scanner";
 
 type SearchBarProps = {
   onSearch: (barcode: string) => void;

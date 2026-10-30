@@ -1,11 +1,11 @@
 import { X } from "lucide-react";
-import Filters from "../components/filters";
-import Products from "../components/products";
-import SearchBar from "../components/search-filter";
-import useGetFoodPopularity from "../hooks/useGetFoodPopularity";
-import { useSearchFilters } from "../hooks/useSearchFilters";
-import Pagination from "../components/pagination";
+import Filters from "../features/search/components/filters";
+import Products from "../features/products/components/products";
+import { useSearchFilters } from "../features/search/hooks/useSearchFilters";
+import Pagination from "../components/ui/pagination";
 import { useSelectedCode } from "../context/codes-context";
+import useGetFoodPopularity from "../features/products/hooks/useGetFoodPopularity";
+import SearchFilter from "../features/search/components/search-filter";
 
 export default function Home() {
   const {
@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col gap-4 p-6">
-      <SearchBar onSearch={handleSearch} />
+      <SearchFilter onSearch={handleSearch} />
 
       <Filters
         onSelectedCountry={(country) => handleFilterChange("country", country)}

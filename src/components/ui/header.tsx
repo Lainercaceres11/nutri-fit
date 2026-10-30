@@ -1,7 +1,7 @@
 import { Heart, BarChart2 } from "lucide-react";
 import { Link } from "react-router";
-import { useSelectedCode } from "../context/codes-context";
-import { useFavoriteStore } from "../store/favorites-store";
+import { useSelectedCode } from "../../context/codes-context";
+import { useFavoriteStore } from "../../store/favorites-store";
 export default function Header() {
   const { selectedCodes } = useSelectedCode();
   const { favorites } = useFavoriteStore();

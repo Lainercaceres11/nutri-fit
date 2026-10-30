@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { openFoodService } from "../services/open-food-services";
+import { openFoodService } from "../../../services/open-food-services";
 
 export default function useGetProductByCode(code: string) {
   const { data, isLoading, error } = useQuery({

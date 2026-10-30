@@ -1,6 +1,6 @@
-import type { Foods } from "../types/types";
+import type { Foods } from "../../../types/types";
 import Product from "./product";
-import ProductsSkeleton from "./skeletons/product-skeleton";
+import ProductsSkeleton from "../../../components/ui/skeletons/product-skeleton";
 
 type ProductsProps = {
   data: Foods;

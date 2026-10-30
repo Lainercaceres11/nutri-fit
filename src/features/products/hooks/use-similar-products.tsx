@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { openFoodService } from "../services/open-food-services";
+import { openFoodService } from "../../../services/open-food-services";
 
 export function useSimilarProducts(
   categoryTag: string,
@@ -16,12 +16,10 @@ export function useSimilarProducts(
         categories_tags: categoryTag,
       });
 
-
       const validAlternatives = data.products.filter(
         (p) => p.code !== currentProductCode && p.image_front_url,
       );
 
-    
       return validAlternatives.slice(0, 6);
     },
     enabled: !!categoryTag && !!currentProductCode,

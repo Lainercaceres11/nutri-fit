@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router";
-import type { Product } from "../types/types";
 import { Check, Plus, Sparkles } from "lucide-react";
+import type { Product } from "../../../types/types";
+import ProductAction from "./product-action";
 
 type SimilarProductsProps = {
   isLoadingAlternatives: boolean;
@@ -15,8 +15,6 @@ export default function SimilarProducts({
   selectedCodes,
   onSelectedProduct,
 }: SimilarProductsProps) {
-  const navigate = useNavigate();
-
   const handleSelectedCode = (code: string) => {
     if (onSelectedProduct) {
       onSelectedProduct(code);
@@ -122,14 +120,7 @@ export default function SimilarProducts({
                       </span>
                     </div>
 
-                    <div className="mt-auto">
-                      <button
-                        onClick={() => navigate(`/food/${alt.code}`)}
-                        className="w-full bg-[#0f172a] hover:bg-[#1e293b] text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors"
-                      >
-                        Ver detalle
-                      </button>
-                    </div>
+                    <ProductAction product={alt} />
                   </div>
                 </div>
               );
